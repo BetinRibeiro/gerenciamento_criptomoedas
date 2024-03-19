@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Inserir Dados</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+    </head>
+    <style>
+        /* Define o tamanho máximo responsivo de largura para o textarea */
+        #currentData, #newData {
+            max-width: 100%; /* Define o máximo de largura como 100% do elemento pai */
+            width: 100%; /* Garante que o textarea preencha todo o espaço disponível */
+            box-sizing: border-box; /* Inclui a largura do padding e da borda no tamanho total do elemento */
+        }
+    </style>
+<body>
+    <nav class="navbar navbar-light">
+        <div class="container d-flex justify-content-center"> 
+            <a class="navbar-brand text-light" href="/index.html">
+            <i class="fa d-inline fa-lg fa-circle-o"></i>
+            <b> Controle Criptomoeda</b>
+          </a> </div>
+      </nav>
+    <div class="py-1 text-center">
+        <div class="container">
+            <div class="row py-2">
+                <div class="col-md-12">
+                    <h2>Formulário para Exibir Conteúdo Atual do LocalStorage</h2>
+                    <form id="currentLocalStorageForm">
+                        <label for="currentData">Conteúdo Atual do LocalStorage:</label><br>
+                        <textarea id="currentData" id="currentData" rows="10" cols="80" readonly></textarea><br>
+                    </form>
+
+                    <h2>Formulário para Inserir Novos Dados no LocalStorage</h2>
+                    <form id="newLocalStorageForm">
+                        <label for="newData">Novos Dados:</label><br>
+                        <textarea id="currentData" id="newData" rows="10" cols="80"></textarea><br>
+                        <button type="button" onclick="saveData()">Salvar Novos Dados</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Função para exibir o conteúdo atual do LocalStorage no primeiro formulário
+        function displayCurrentData() {
+            const currentData = localStorage.getItem("criptomoedas");
+            if (currentData) {
+                document.getElementById("currentData").value = currentData;
+            } else {
+                document.getElementById("currentData").value = "LocalStorage vazio.";
+            }
+        }
+
+        // Função para salvar os novos dados no LocalStorage
+        function saveData() {
+            const newData = document.getElementById("newData").value;
+            localStorage.setItem("criptomoedas", newData);
+            alert("Novos dados salvos no LocalStorage!");
+            displayCurrentData(); // Atualiza o formulário de exibição com os dados recém-salvos
+        }
+
+        // Exibir o conteúdo atual do LocalStorage ao carregar a página
+        displayCurrentData();
+    </script>
+</body>
+</html>
